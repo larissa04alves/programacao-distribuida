@@ -1,0 +1,33 @@
+//
+// Interface Logger
+//
+//   Sistemas Distribuídos
+//   Escola Politécnica - PUCPR
+//
+//   Grupo T1-XX: Larissa Silva, Nome 2, Nome 3, Nome 4
+//
+// Compilar com:
+//
+//     tao_idl -Gstl Logger.idl
+//
+// para gerar stub e skeleton.
+//
+
+// O enunciado pede enum para restringir os valores da severidade.
+enum Severidade { DEBUG, WARNING, ERROR, CRITICAL };
+
+// Lançada por locate() quando ainda não chegou nenhum evento com a severidade pedida.
+exception SeveridadeInexistente {};
+
+interface Logger {
+
+    // notificação assíncrona: oneway só aceita parâmetros "in" e retorno void
+    oneway void log(in Severidade severidade,   // DEBUG, WARNING, ERROR ou CRITICAL
+                    in string endereco,         // "ip:porta" de onde veio o evento
+                    in unsigned short pid,      // processo que causou o evento
+                    in long hora,               // segundos desde 1/1/1970
+                    in string msg);             // descrição do evento
+
+    // endereço ("ip:porta") do último evento recebido com severidade s
+    string locate(in Severidade s) raises (SeveridadeInexistente);
+};

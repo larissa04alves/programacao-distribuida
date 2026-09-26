@@ -1,0 +1,10 @@
+# gerados pelo tao_idl a partir do Logger.idl (o make recria)
+idl/LoggerC.*
+idl/LoggerS.*
+idl/LoggerI.*
+
+# compilacao
+*.o
+core
+bin/*
+!bin/.gitkeep
