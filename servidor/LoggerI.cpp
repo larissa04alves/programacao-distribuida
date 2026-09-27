@@ -55,6 +55,12 @@ std::string Logger_i::locate (
     ::Severidade s)
 {
   // Procurar o ultimo endereco de severidade 's' no map
-  std::map < ::Severidade, std::string >::iterator it = this-> ultimos_enderecos_.
-  return "";
+  std::map < ::Severidade, std::string >::iterator it = this-> ultimos_enderecos_.find(s);
+  // Se nao encontrou nenhum evento registrado para essa severidade, lanca excecao
+  if (it == this -> ultimos_enderecos_.end())
+  {
+    throw ::SeveridadeInexistente();
+  }
+  // Devolver o endereco correspondentes 
+  return it->second;
 }
