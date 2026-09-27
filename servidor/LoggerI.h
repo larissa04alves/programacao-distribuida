@@ -7,6 +7,7 @@
 #define LOGGERI_H_
 
 #include <string>
+#include <map>
 #include "LoggerS.h"
 
 class Logger_i : public virtual POA_Logger
@@ -26,6 +27,13 @@ public:
   // string locate(in Severidade) raises (SeveridadeInexistente)
   virtual std::string locate (
       ::Severidade s);
+
+private:
+  // Estrutura em memoria para guardar o ultimo endereco de cada severidade
+  std::map< ::Severidade, std::string > ultimos_enderecos_;
+
+  // Auxiliar para converter enum em string para o std::cout
+  const char* severidade_para_string(::Severidade s);
 };
 
 #endif /* LOGGERI_H_ */
