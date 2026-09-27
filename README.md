@@ -30,3 +30,20 @@ tao_cosnaming -ORBEndpoint iiop://localhost:1050
 ./bin/servidor -ORBInitRef NameService=corbaloc:iiop:localhost:1050/NameService
 ./bin/cliente  -ORBInitRef NameService=corbaloc:iiop:localhost:1050/NameService
 ```
+## Implementação do Servant (LoggerI) - Pessoa 2
+
+A classe `Logger_i` gerencia o estado do servidor e processa as chamadas remotas dos clientes:
+
+### Estrutura de Dados
+- **`ultimos_enderecos_`**: Um `std::map< ::Severidade, std::string >` mantido em memória para registrar o endereço IP/porta do último evento recebido para cada nível de severidade.
+
+### Métodos Implementados
+1. **`log(...)`**:
+   - Atualiza o registro interno (`ultimos_enderecos_`) com o endereço recebido.
+   - Formata o timestamp Unix recebido para data/hora legível (`YYYY-MM-DD HH:MM:SS`).
+   - Imprime no terminal os dados do evento (Severidade, Endereço, PID, Hora e Mensagem).
+
+2. **`locate(Severidade s)`**:
+   - Realiza a busca no mapa pelo último endereço da severidade enviada.
+   - **Lança a exceção `SeveridadeInexistente`** caso nenhum evento com essa severidade tenha sido recebido previamente.
+   - Retorna a `std::string` correspondente ao endereço caso seja localizado.
