@@ -1,10 +1,8 @@
-// LoggerI.cpp: implementacao do servant. ARQUIVO DA ENTREGA.
-// Esqueleto com os metodos vazios (o que o tao_idl -Gstl -GI gera).
-// Pessoa 2: preencher conforme a secao 5 do plano. FEITO
+// LoggerI.cpp: implementacao do servant Logger
 
 #include "LoggerI.h"
 #include <iostream>
-#include<ctime>
+#include <ctime>
 
 Logger_i::Logger_i (void)
 {
@@ -14,7 +12,6 @@ Logger_i::~Logger_i (void)
 {
 }
 
-// Funcao auxiliar para exibir o nome da severidade em vez de um numero.
 const char* Logger_i::severidade_para_string(::Severidade s){
   switch (s)
   {
@@ -33,34 +30,29 @@ void Logger_i::log (
     ::CORBA::Long hora,
     std::string msg)
 {
-  // Guardar o ultimo endereco recebido para esta severidade
-  this ->ultimos_enderecos_[severidade] = endereco;
+  this->ultimos_enderecos_[severidade] = endereco;
 
-  // Converter o timestamp (segundos) para formato legivel de data e hora
-  std::time_t tempo = static_cast < std::time_t>(hora);
+  // converte os segundos desde 1/1/1970 em data e hora legiveis
+  std::time_t tempo = static_cast<std::time_t>(hora);
   char buffer_data[100];
   std::strftime(buffer_data, sizeof(buffer_data), "%Y-%m-%d %H:%M:%S", std::localtime(&tempo));
 
-  // Imprimir os cinco campos na tela
-  std::cout <<"==================================================" << std::endl;
+  std::cout << "==================================================" << std::endl;
   std::cout << "[LOG RECEBIDO]" << std::endl;
-  std::cout << "Severidade : " << this-> severidade_para_string(severidade) << std::endl;
+  std::cout << "Severidade : " << this->severidade_para_string(severidade) << std::endl;
   std::cout << "Endereço : " << endereco << std::endl;
   std::cout << "PID : " << pid << std::endl;
-  std::cout << "Hora : " << buffer_data << " (" << hora << "s)"<< std::endl;
+  std::cout << "Hora : " << buffer_data << " (" << hora << "s)" << std::endl;
   std::cout << "Mensagem : " << msg << std::endl;
 }
 
 std::string Logger_i::locate (
     ::Severidade s)
 {
-  // Procurar o ultimo endereco de severidade 's' no map
-  std::map < ::Severidade, std::string >::iterator it = this-> ultimos_enderecos_.find(s);
-  // Se nao encontrou nenhum evento registrado para essa severidade, lanca excecao
-  if (it == this -> ultimos_enderecos_.end())
+  std::map< ::Severidade, std::string >::iterator it = this->ultimos_enderecos_.find(s);
+  if (it == this->ultimos_enderecos_.end())
   {
     throw ::SeveridadeInexistente();
   }
-  // Devolver o endereco correspondentes 
   return it->second;
 }
