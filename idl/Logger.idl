@@ -1,6 +1,6 @@
 // Interface Logger - Sistemas Distribuídos - PUCPR
 //
-// Grupo T1-XX: Alana da Conceição Queiroz, Larissa Alves da Silva,
+// Grupo T1-15: Alana da Conceição Queiroz, Larissa Alves da Silva,
 //              Leticia Maria Maia de Andrade Vieira, Thomas Manussadjian Steinhausser
 
 enum Severidade { DEBUG, WARNING, ERROR, CRITICAL };

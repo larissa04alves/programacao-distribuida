@@ -1,5 +1,5 @@
 // cliente.cpp: testa toda a interface do Logger (log, locate e a excecao)
-// uso: ./bin/cliente -ORBInitRef NameService=corbaloc:iiop:localhost:1050/NameService [ip:porta]
+// uso: ./bin/cliente -ORBInitRef NameService=corbaloc:iiop:localhost:2809/NameService [ip:porta]
 
 #include <iostream>
 #include <string>

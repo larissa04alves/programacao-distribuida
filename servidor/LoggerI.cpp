@@ -40,7 +40,7 @@ void Logger_i::log (
   std::cout << "==================================================" << std::endl;
   std::cout << "[LOG RECEBIDO]" << std::endl;
   std::cout << "Severidade : " << this->severidade_para_string(severidade) << std::endl;
-  std::cout << "Endereço : " << endereco << std::endl;
+  std::cout << "Endereco : " << endereco << std::endl;
   std::cout << "PID : " << pid << std::endl;
   std::cout << "Hora : " << buffer_data << " (" << hora << "s)" << std::endl;
   std::cout << "Mensagem : " << msg << std::endl;
